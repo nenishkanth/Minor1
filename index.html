@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Detector</title>
+
+    <!-- Bootstrap CSS (Include Bootstrap in your project) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: url('/static/sl_031420_28950_10.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1,
+        h2 {
+            color: #ecf0f1;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #219653;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #f39c12;
+        }
+
+        .highlight {
+            background-color: #043e64;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>SMS SPAM DETECTION</h1>
+        <p>Welcome to the SMS Spam Detection web application! Use the form below to predict whether a given SMS message is ham (not spam) or spam.</p>
+
+        <form action="/predict" method="post">
+            <label for="sms_message">Enter SMS Message:</label>
+            <input type="text" name="sms_message" required>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+
+        {% if result %}
+        <p>You entered: {{ sms_message }}</p>
+        <p>{{ result }}</p>
+        {% endif %}
+
+        <h2>Prediction History</h2>
+        {% if predictions %}
+        {% for prediction in predictions %}
+        <p class="highlight"><strong>{{ prediction['sms_message'] }}</strong>: {{ prediction['prediction'] }}</p>
+        {% endfor %}
+        {% else %}
+        <p>No predictions yet.</p>
+        {% endif %}
+
+        <h2>Spam Awareness</h2>
+        <p>Spam attacks are attempts to distribute unsolicited messages, often for malicious purposes. They can contain scams, phishing attempts, or malware.</p>
+
+        <h2>History of Spam Attacks</h2>
+        <p>Spam attacks have been a persistent issue in electronic communication. The term "spam" originated from a Monty Python sketch where the word was repeated excessively, reflecting the repetitive nature of unwanted messages.</p>
+        <p>Over the years, spam has evolved, becoming more sophisticated and adapting to changes in technology. Common types of spam include email spam, SMS spam, and social media spam. Cybercriminals often use spam as a vehicle for phishing attacks or to spread malware.</p>
+        <p>It's crucial to stay vigilant and employ spam detection mechanisms to protect against potential threats.</p>
+
+        <h2>Ham and Spam Messages</h2>
+        <p><strong>Ham:</strong> Ham messages are legitimate, non-spam messages. They are typically desired and expected by the recipient.</p>
+        <p><strong>Spam:</strong> Spam messages are unwanted and often contain irrelevant or inappropriate content. They may attempt to deceive or harm the recipient.</p>
+    </div>
+
+    <!-- Bootstrap JS (Include Bootstrap in your project) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
